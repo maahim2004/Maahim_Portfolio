@@ -1,0 +1,28 @@
+
+> port_v2@0.0.0 lint
+> eslint .
+
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\components\layout\Navbar.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\AboutSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\ContactSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\ExperienceSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\HeroSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\ProjectsSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\MAAHIM PATEL\.gemini\antigravity\scratch\mechanical-portfolio\port_v2\src\pages\SkillsSection.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+✖ 7 problems (7 errors, 0 warnings)
+
