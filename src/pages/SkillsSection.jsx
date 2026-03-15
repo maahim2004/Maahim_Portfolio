@@ -28,15 +28,6 @@ const skillCategories = [
       { name: "SQL", level: 65 },
     ],
     color: "bg-blue-500"
-  },
-  {
-    title: "Embedded Systems",
-    skills: [
-      { name: "Arduino IDE", level: 90 },
-      { name: "Verilog", level: 70 },
-      { name: "Raspberry Pi", level: 80 },
-    ],
-    color: "bg-purple-500"
   }
 ];
 
