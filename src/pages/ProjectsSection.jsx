@@ -3,25 +3,32 @@ import { ExternalLink, Database, Cpu, Cog, ChevronLeft, ChevronRight } from 'luc
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, Stage, OrbitControls } from '@react-three/drei';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 function InteractiveModel({ url, disableTransparency = false }) {
   const { scene } = useGLTF(url);
+  
+  // Clone the scene and materials to allow multiple independent instances
+  const clonedScene = useMemo(() => {
+    const clone = scene.clone();
+    clone.traverse((child) => {
+      if (child.isMesh) {
+        child.material = child.material.clone();
+      }
+    });
+    return clone;
+  }, [scene]);
+
   const modelRef = useRef();
   const [hovered, setHovered] = useState(false);
   const [wireframe, setWireframe] = useState(false);
 
   // Apply wireframe and emissive materials
   useEffect(() => {
-    scene.traverse((child) => {
+    clonedScene.traverse((child) => {
       if (child.isMesh) {
-        // Clone material so we don't mess up global cache if model is reused
-        if (!child.userData.originalMaterial) {
-          child.userData.originalMaterial = child.material.clone();
-        }
-        
         const mat = child.material;
         mat.wireframe = wireframe;
         
@@ -35,18 +42,16 @@ function InteractiveModel({ url, disableTransparency = false }) {
 
           if (isOuterShell) {
             mat.transparent = true;
-            mat.opacity = 0.25; // Slightly more visible but still clear
+            mat.opacity = 0.25; 
             mat.side = THREE.DoubleSide;
-            mat.depthWrite = false; // Allow inner parts to draw through
+            mat.depthWrite = false;
             mat.blending = THREE.NormalBlending;
           } else {
-            // Ensure inner parts are fully opaque and stand out
             mat.transparent = false;
             mat.opacity = 1.0;
             mat.depthWrite = true;
           }
         } else {
-          // If transparency is disabled, ensure everything is opaque
           mat.transparent = false;
           mat.opacity = 1.0;
           mat.depthWrite = true;
@@ -62,7 +67,7 @@ function InteractiveModel({ url, disableTransparency = false }) {
         mat.needsUpdate = true;
       }
     });
-  }, [scene, wireframe, hovered, disableTransparency]);
+  }, [clonedScene, wireframe, hovered, disableTransparency]);
 
   // Animate scaling on hover
   useFrame((state, delta) => {
@@ -70,7 +75,6 @@ function InteractiveModel({ url, disableTransparency = false }) {
       const targetScale = hovered ? 1.05 : 1;
       modelRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 5);
       
-      // Add a slight bobbing effect when hovered
       if (hovered) {
         modelRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.05;
       } else {
@@ -82,7 +86,7 @@ function InteractiveModel({ url, disableTransparency = false }) {
   return (
     <primitive 
       ref={modelRef}
-      object={scene} 
+      object={clonedScene} 
       onPointerOver={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer'; }}
       onPointerOut={(e) => { e.stopPropagation(); setHovered(false); document.body.style.cursor = 'auto'; }}
       onClick={(e) => { e.stopPropagation(); setWireframe(!wireframe); }}

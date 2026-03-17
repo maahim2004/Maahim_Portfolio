@@ -18,7 +18,8 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         display: ['Orbitron', 'sans-serif'],
-        mono: ['Fira Code', 'monospace']
+        mono: ['Fira Code', 'monospace'],
+        oldMoney: ['Cormorant Garamond', 'serif']
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

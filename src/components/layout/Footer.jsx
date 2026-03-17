@@ -23,7 +23,7 @@ export default function Footer() {
             <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-textMuted hover:text-primary transition-colors">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="mailto:maahim@example.com" className="text-textMuted hover:text-primary transition-colors">
+            <a href="mailto:maahim2627@gmail.com" className="text-textMuted hover:text-primary transition-colors">
               <Mail className="w-5 h-5" />
             </a>
           </div>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, User, Users, CheckCircle2, ShieldCheck, Send } from 'lucide-react';
+import { Mail, ArrowRight, User, Users, CheckCircle2, ShieldCheck, Send, Phone } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactSection() {
@@ -9,13 +9,21 @@ export default function ContactSection() {
     e.preventDefault();
     setFormStatus('sending');
     
+    // NOTE: To use AJAX (fetch), you MUST create a form on Formspree.io 
+    // and replace your email address below with the "Form ID" they provide.
+    // Example: https://formspree.io/f/mqakpggp
+    const formId = "maahim2627@gmail.com"; // <-- REPLACE THIS WITH YOUR FORM ID
+    const endpoint = `https://formspree.io/${formId.includes('@') ? '' : 'f/'}${formId}`;
+
     const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
     
     try {
-      const response = await fetch('https://formspree.io/maahim2627@gmail.com', {
+      const response = await fetch(endpoint, {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(data),
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
       });
@@ -24,8 +32,8 @@ export default function ContactSection() {
         setFormStatus('success');
         e.target.reset();
       } else {
-        const data = await response.json();
-        console.error('Formspree Error:', data);
+        const result = await response.json();
+        console.error('Formspree Error:', result);
         setFormStatus('error');
       }
     } catch (error) {
@@ -71,18 +79,18 @@ export default function ContactSection() {
                 <div className="pt-6 border-t border-white/5">
                    <p className="text-sm text-textMuted mb-4 font-mono uppercase tracking-widest text-primary/60">Secure Communication Protocol</p>
                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3 text-white/80">
-                         <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                            <ShieldCheck className="w-4 h-4 text-primary" />
-                         </div>
-                         <span className="text-xs font-mono">End-to-End Encrypted Data Stream</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-white/80">
-                         <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                            <Mail className="w-4 h-4 text-secondary" />
-                         </div>
-                         <span className="text-xs font-mono">maahim2627@gmail.com</span>
-                      </div>
+                       <a href="tel:+919913665961" className="flex items-center gap-3 text-white/80 hover:text-primary transition-colors group/tel">
+                          <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/tel:border-primary/50 transition-colors">
+                             <Phone className="w-4 h-4 text-primary group-hover/tel:text-primary transition-colors" />
+                          </div>
+                          <span className="text-xs font-mono">+91 99136 65961</span>
+                       </a>
+                       <a href="mailto:maahim2627@gmail.com" className="flex items-center gap-3 text-white/80 hover:text-primary transition-colors group/mail">
+                          <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/mail:border-primary/50 transition-colors">
+                             <Mail className="w-4 h-4 text-secondary group-hover/mail:text-primary transition-colors" />
+                          </div>
+                          <span className="text-xs font-mono">maahim2627@gmail.com</span>
+                       </a>
                    </div>
                 </div>
               </div>

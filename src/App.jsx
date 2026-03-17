@@ -14,7 +14,7 @@ function App() {
       <ParticleBackground />
       <Navbar />
       
-      <main className="relative z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6">
+      <main className="relative z-10 flex flex-col items-center justify-center w-full">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />

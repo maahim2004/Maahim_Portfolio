@@ -1,119 +1,148 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-
-function RotatingGear() {
-  const meshRef = useRef();
-  
-  useFrame((state, delta) => {
-    meshRef.current.rotation.x += delta * 0.2;
-    meshRef.current.rotation.y += delta * 0.5;
-    meshRef.current.rotation.z += delta * 0.3;
-  });
-
-  return (
-    <mesh ref={meshRef}>
-      <torusKnotGeometry args={[2, 0.4, 128, 32]} />
-      <meshStandardMaterial 
-        color="#00F0FF" 
-        wireframe={true} 
-        transparent 
-        opacity={0.3}
-        emissive="#00F0FF"
-        emissiveIntensity={0.5}
-      />
-    </mesh>
-  );
-}
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
+import { Suspense, useRef } from 'react';
+import HeroTurbofan from '../components/3d/HeroTurbofan';
+import HeroEffects from '../components/3d/HeroEffects';
 
 export default function HeroSection() {
-  return (
-    <section id="home" className="min-h-screen w-full flex items-center justify-center pt-20">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Text Area */}
-        <div className="flex flex-col space-y-6 z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <div className="h-[2px] w-12 bg-primary shadow-glow"></div>
-            <span className="text-primary font-mono tracking-wider text-sm uppercase">INITIATING SEQUENCE...</span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold font-display leading-tight"
-          >
-            ENGINEERING <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-secondary text-glow">
-              THE FUTURE
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-textMuted max-w-xl font-light"
-          >
-            I am <span className="text-white font-medium">Maahim Nimesh Patel</span>, a Mechanical Engineering student at SVNIT specializing in robotics, finite element analysis, and next-generation system prototyping.
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 pt-4"
-          >
-            <a href="#projects" className="group relative px-6 py-3 rounded-md bg-primary text-background font-bold font-display overflow-hidden flex items-center justify-center gap-2 hover:shadow-glow-primary transition-all">
-              <span className="relative z-10">VIEW SCHEMATICS (PROJECTS)</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer"></div>
-            </a>
-            
-            <a href="https://drive.google.com/drive/folders/1vM5ls7EUAPbmPj6pRI50LJ-Z-BaOENr8?usp=drive_link" target="_blank" rel="noopener noreferrer" className="group px-6 py-3 rounded-md border border-white/20 hover:border-secondary/50 glass-panel-hover flex items-center justify-center gap-2 font-display text-textDefault transition-all">
-              <span>DOWNLOAD DATA_LOG (RESUME)</span>
-              <Download className="w-5 h-5 text-secondary group-hover:-translate-y-1 transition-transform" />
-            </a>
-          </motion.div>
-        </div>
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-        {/* 3D Model Area */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="h-[400px] md:h-[600px] w-full relative"
+  // Parallax and fade effects for smooth transition
+  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+  return (
+    <section 
+      id="home" 
+      ref={containerRef}
+      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-transparent"
+    >
+      {/* Background Effects Layer */}
+      <HeroEffects />
+      
+      {/* 3D Turbofan Visualization Layer */}
+      <motion.div style={{ y, scale, opacity }} className="absolute inset-0 z-0">
+        <Canvas 
+          shadows 
+          camera={{ position: [0, 0, 10], fov: 35 }}
+          gl={{ antialias: true, alpha: true }}
         >
-          {/* Decorative Elements */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/20 rounded-full blur-[100px] -z-10"></div>
-          <div className="absolute top-4 right-4 w-16 h-16 border-t font-mono text-xs border-r border-primary/30 flex items-start justify-end p-2 text-primary/50">SYS.ON</div>
-          <div className="absolute bottom-4 left-4 w-16 h-16 border-b border-l border-primary/30"></div>
+          <Suspense fallback={null}>
+            <HeroTurbofan />
+          </Suspense>
+        </Canvas>
+      </motion.div>
+
+      {/* Engineering Status Panel (Top Right) */}
+      <motion.div 
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute top-24 right-10 z-30 hidden md:block"
+      >
+        <div className="glass-panel p-4 border-l-2 border-primary/50 font-mono text-[10px] space-y-1">
+          <div className="text-primary/70 tracking-widest uppercase mb-2 border-b border-primary/20 pb-1">System Status</div>
+          <div className="flex justify-between gap-8">
+            <span className="text-textMuted">CAD ENGINE:</span>
+            <span className="text-primary animate-pulse">ACTIVE</span>
+          </div>
+          <div className="flex justify-between gap-8">
+            <span className="text-textMuted">SIMULATION CORE:</span>
+            <span className="text-primary">READY</span>
+          </div>
+          <div className="flex justify-between gap-8">
+            <span className="text-textMuted">PROPULSION ANALYSIS:</span>
+            <span className="text-primary">ONLINE</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Content Overlay */}
+      <div className="relative z-20 container mx-auto px-6 h-full flex flex-col items-start justify-center text-left pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="max-w-5xl"
+        >
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="inline-block mb-6 px-4 py-1.5 border border-primary/30 rounded-full bg-primary/5 backdrop-blur-md"
+          >
+            <span className="text-primary font-mono text-[11px] tracking-[0.5em] uppercase">Aerospace Engineering Portfolio</span>
+          </motion.div>
           
-          <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={2} color="#00F0FF" />
-            <pointLight position={[-10, -10, -10]} intensity={1} color="#FF6E00" />
-            <RotatingGear />
-          </Canvas>
+          <h1 className="text-7xl md:text-[10rem] font-display font-black leading-[0.8] mb-4 tracking-[0.05em] uppercase bg-gradient-to-b from-white via-white to-primary bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,240,255,0.4)]">
+            Maahim Patel
+          </h1>
           
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={{ width: "300px" }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-[3px] bg-primary mb-10 shadow-[0_0_20px_#00f0ff]"
+          ></motion.div>
+          
+          <div className="space-y-6">
+            <motion.h2 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-xl md:text-3xl text-secondary font-display tracking-[0.3em] uppercase font-light"
+            >
+              Mechanical Engineer | CAD Design | Turbomachinery Concepts
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="text-textMuted max-w-2xl italic font-light text-lg md:text-xl border-l border-white/10 pl-8 pr-4"
+            >
+              "Engineering mechanical systems through design, simulation, and visualization."
+            </motion.p>
+          </div>
         </motion.div>
       </div>
-      
-      {/* Scroll indicator */}
+
+      {/* Animated Scroll Indicator */}
       <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.6 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-30 cursor-pointer pointer-events-auto"
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
       >
-        <span className="text-xs font-mono text-primary tracking-widest uppercase">Scroll to initialize</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
+        <span className="text-[10px] font-mono text-primary tracking-[0.4em] uppercase">Begin Inspection</span>
+        <div className="flex flex-col items-center">
+          <motion.div 
+            animate={{ y: [0, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="text-primary text-xl"
+          >
+            ↓
+          </motion.div>
+          <motion.div 
+            animate={{ y: [0, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
+            className="text-primary/60 text-lg -mt-3"
+          >
+            ↓
+          </motion.div>
+          <motion.div 
+            animate={{ y: [0, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.4 }}
+            className="text-primary/30 text-md -mt-3"
+          >
+            ↓
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );
