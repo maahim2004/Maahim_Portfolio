@@ -33,7 +33,11 @@ function Particles() {
 export default function ParticleBackground() {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
-      <Canvas camera={{ position: [0, 0, 8] }}>
+      <Canvas 
+        camera={{ position: [0, 0, 8] }}
+        dpr={[1, 1]} 
+        gl={{ antialias: false, powerPreference: "low-power" }}
+      >
         <Particles />
       </Canvas>
     </div>

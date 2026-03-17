@@ -12,7 +12,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-wide;
+    @apply font-display font-bold tracking-[0.1em] uppercase;
   }
 }
 
@@ -26,7 +26,7 @@
   }
   
   .text-glow {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); /* Glow Accent */
   }
   
   .text-glow-orange {
@@ -35,8 +35,8 @@
 
   .blueprint-grid {
     background-image: 
-      linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+      linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     background-position: center center;
   }
@@ -61,5 +61,5 @@
 
 /* Base element styles */
 ::selection {
-  @apply bg-primary/30 text-white;
+  @apply bg-primary/20 text-white;
 }

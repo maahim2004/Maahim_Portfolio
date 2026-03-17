@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Suspense, useRef } from 'react';
+import { FileText, ExternalLink } from 'lucide-react';
 import HeroTurbofan from '../components/3d/HeroTurbofan';
 import HeroEffects from '../components/3d/HeroEffects';
 
@@ -31,6 +32,8 @@ export default function HeroSection() {
           shadows 
           camera={{ position: [0, 0, 10], fov: 35 }}
           gl={{ antialias: true, alpha: true }}
+          dpr={[1, 1.5]}
+          frameloop="always" 
         >
           <Suspense fallback={null}>
             <HeroTurbofan />
@@ -79,7 +82,7 @@ export default function HeroSection() {
             <span className="text-primary font-mono text-[11px] tracking-[0.5em] uppercase">Aerospace Engineering Portfolio</span>
           </motion.div>
           
-          <h1 className="text-7xl md:text-[10rem] font-display font-black leading-[0.8] mb-4 tracking-[0.05em] uppercase bg-gradient-to-b from-white via-white to-primary bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,240,255,0.4)]">
+          <h1 className="text-7xl md:text-[10rem] font-display font-bold leading-[0.8] mb-4 tracking-[0.05em] uppercase bg-gradient-to-b from-white via-white to-primary bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(56,189,248,0.4)]">
             Maahim Patel
           </h1>
           
@@ -87,7 +90,7 @@ export default function HeroSection() {
             initial={{ width: 0 }}
             animate={{ width: "300px" }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="h-[3px] bg-primary mb-10 shadow-[0_0_20px_#00f0ff]"
+            className="h-[3px] bg-primary mb-10 shadow-[0_0_20px_#38bdf8]"
           ></motion.div>
           
           <div className="space-y-6">
@@ -95,9 +98,9 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="text-xl md:text-3xl text-secondary font-display tracking-[0.3em] uppercase font-light"
+              className="text-xl md:text-2xl text-secondary font-display tracking-[0.2em] md:tracking-[0.4em] uppercase font-bold"
             >
-              Mechanical Engineer | CAD Design | Turbomachinery Concepts
+              3rd Year Mechanical Major @ SVNIT Surat | CAD | Turbomachinery
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
@@ -107,6 +110,25 @@ export default function HeroSection() {
             >
               "Engineering mechanical systems through design, simulation, and visualization."
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+              className="pt-4 pointer-events-auto"
+            >
+              <a 
+                href="https://drive.google.com/drive/folders/1vM5ls7EUAPbmPj6pRI50LJ-Z-BaOENr8?usp=drive_link" 
+                target="_blank" 
+                rel="noreferrer"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border border-primary/50 rounded-full text-primary font-display font-bold text-sm tracking-widest uppercase overflow-hidden transition-all hover:bg-primary hover:text-black hover:shadow-glow-primary"
+              >
+                <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-shimmer"></div>
+                <FileText className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Access Documentation</span>
+                <ExternalLink className="w-4 h-4 relative z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </motion.div>
           </div>
         </motion.div>
       </div>

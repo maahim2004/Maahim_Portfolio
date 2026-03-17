@@ -9,8 +9,8 @@ export default function HeroEffects() {
         className="absolute inset-0 opacity-[0.15]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #00f0ff 1px, transparent 1px),
-            linear-gradient(to bottom, #00f0ff 1px, transparent 1px)
+            linear-gradient(to right, #38bdf8 1px, transparent 1px),
+            linear-gradient(to bottom, #38bdf8 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
           maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
@@ -26,7 +26,7 @@ export default function HeroEffects() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent shadow-[0_0_15px_rgba(0,240,255,0.5)] z-20"
+        className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent shadow-[0_0_15px_rgba(56,189,248,0.5)] z-20"
       />
 
       {/* Decorative Corner Brackets */}
@@ -51,15 +51,7 @@ export default function HeroEffects() {
       </div>
 
       {/* Faint Moving Light Blooms */}
-      <motion.div
-        animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          opacity: [0.1, 0.2, 0.1]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"
-      />
+      {/* Faint Moving Light Blooms Removed for all-black theme */}
     </div>
   );
 }

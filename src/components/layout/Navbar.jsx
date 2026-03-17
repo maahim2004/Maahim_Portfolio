@@ -57,13 +57,15 @@ export default function Navbar() {
             </motion.a>
           ))}
           <motion.a
-            href="#contact"
+            href="https://drive.google.com/drive/folders/1vM5ls7EUAPbmPj6pRI50LJ-Z-BaOENr8?usp=drive_link"
+            target="_blank"
+            rel="noreferrer"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
             className="px-5 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary/10 hover:shadow-glow transition-all text-sm font-display font-medium"
           >
-            Terminal Output
+            CV / Drive
           </motion.a>
         </nav>
 

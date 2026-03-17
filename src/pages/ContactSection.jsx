@@ -1,49 +1,42 @@
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, User, Users, CheckCircle2, ShieldCheck, Send, Phone } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, User, Users, Phone, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactSection() {
-  const [formStatus, setFormStatus] = useState('idle'); // idle, sending, success, error
+  const [hoveredLink, setHoveredLink] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setFormStatus('sending');
-    
-    // NOTE: To use AJAX (fetch), you MUST create a form on Formspree.io 
-    // and replace your email address below with the "Form ID" they provide.
-    // Example: https://formspree.io/f/mqakpggp
-    const formId = "maahim2627@gmail.com"; // <-- REPLACE THIS WITH YOUR FORM ID
-    const endpoint = `https://formspree.io/${formId.includes('@') ? '' : 'f/'}${formId}`;
-
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
-      
-      if (response.ok) {
-        setFormStatus('success');
-        e.target.reset();
-      } else {
-        const result = await response.json();
-        console.error('Formspree Error:', result);
-        setFormStatus('error');
-      }
-    } catch (error) {
-      console.error('Submission Error:', error);
-      setFormStatus('error');
+  const connectLinks = [
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      icon: <Linkedin className="w-5 h-5" />,
+      label: 'Professional Network',
+      url: 'https://linkedin.com/in/maahim-patel', // Placeholder/Actual if known
+      color: 'text-[#0077b5]',
+      borderColor: 'border-[#0077b5]/30'
+    },
+    {
+      id: 'github',
+      name: 'GitHub',
+      icon: <Github className="w-5 h-5" />,
+      label: 'Code Repositories',
+      url: 'https://github.com/maahim2004',
+      color: 'text-white',
+      borderColor: 'border-white/30'
+    },
+    {
+      id: 'reachout',
+      name: 'Direct Contact',
+      icon: <MessageSquare className="w-5 h-5" />,
+      label: 'Inquiries & Collabs',
+      url: 'mailto:maahim2627@gmail.com',
+      color: 'text-primary',
+      borderColor: 'border-primary/30'
     }
-  };
+  ];
 
   return (
-    <section id="contact" className="py-24 relative mt-12 bg-background/80 border-t border-primary/20 shadow-[0_-10px_30px_rgba(0,240,255,0.05)]">
+    <section id="contact" className="py-24 relative mt-12 bg-background border-t border-primary/20 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
       <div className="container mx-auto px-6 max-w-6xl">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -55,7 +48,7 @@ export default function ContactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-display font-bold text-glow mb-8 text-white">SYSTEM <br/> LEADERSHIP</h2>
+              <h2 className="text-4xl font-display font-bold text-glow mb-8 text-white uppercase leading-tight">POSITION OF <br/> RESPONSIBILITY</h2>
               
               <div className="space-y-6 mb-12">
                 <div className="glass-panel p-6 border-l-2 border-primary">
@@ -70,7 +63,7 @@ export default function ContactSection() {
                 <div className="glass-panel p-6 border-l-2 border-secondary">
                   <div className="flex items-center gap-3 mb-2">
                     <Users className="w-5 h-5 text-secondary" />
-                    <h3 className="font-display font-bold text-white text-lg">Junior Technical Member</h3>
+                    <h3 className="font-display font-bold text-white text-lg">Senior Technical Member</h3>
                   </div>
                   <p className="text-textMuted mb-1 text-sm">DRISHTI Club, SVNIT</p>
                   <p className="text-textMuted/60 text-xs font-mono">Technical Design & Fabrication</p>
@@ -102,87 +95,59 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-panel p-8 relative overflow-hidden flex flex-col min-h-[500px]"
+            className="glass-panel p-8 relative overflow-hidden flex flex-col justify-between min-h-[500px]"
           >
-            {/* Cyberpunk circuit accents */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 mask-image:linear-gradient(to_bottom,white,transparent)"></div>
+            {/* Professional Accents */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-16 -mt-16 blur-3xl opacity-50"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-secondary/5 rounded-tr-full -ml-12 -mb-12 blur-2xl opacity-30"></div>
             
-            <h2 className="text-2xl font-display font-bold text-primary mb-2 uppercase tracking-tight">Comm-Link Channel</h2>
-            
-            {formStatus === 'success' ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex-1 flex flex-col items-center justify-center text-center p-6"
-              >
-                <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-6 shadow-glow-primary border border-primary/30">
-                  <CheckCircle2 className="w-10 h-10 text-primary" />
-                </div>
-                <h3 className="text-2xl font-display font-bold text-white mb-4">TRANSMISSION RECEIVED</h3>
-                <p className="text-textMuted font-mono text-sm max-w-xs mb-8">
-                  Your data payload has been successfully uplinked to the server. Response sequence initiated.
-                </p>
-                <button 
-                  onClick={() => setFormStatus('idle')}
-                  className="px-6 py-2 border border-primary/50 text-primary font-mono text-xs hover:bg-primary/10 transition-colors uppercase tracking-widest"
-                >
-                  Return to Dashboard
-                </button>
-              </motion.div>
-            ) : (
-              <>
-                <p className="text-sm text-textMuted mb-8 font-mono">Status: {formStatus === 'sending' ? 'Uplinking Data...' : 'Awaiting Transmission...'}</p>
+            <div className="relative z-10">
+              <h2 className="text-2xl font-display font-bold text-white mb-2 uppercase tracking-tight">Professional Network</h2>
+              <div className="h-1 w-12 bg-primary mb-6"></div>
+              
+              <p className="text-sm text-textMuted mb-10 font-mono leading-relaxed max-w-md">
+                Interested in collaboration or professional inquiries? Connect with me through my verified channels below. I am actively seeking opportunities in mechanical design, robotics fabrication, and engineering management.
+              </p>
 
-                <form className="space-y-4 relative z-10 flex-1" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-mono text-primary/80 uppercase tracking-widest">Name Designation</label>
-                      <input 
-                        required
-                        name="name"
-                        type="text" 
-                        className="w-full bg-background/50 border border-white/10 rounded tracking-wide px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors placeholder:text-white/10"
-                        placeholder="IDENTIFY RECIPIENT..."
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-mono text-primary/80 uppercase tracking-widest">Comm Channel (Email)</label>
-                      <input 
-                        required
-                        name="email"
-                        type="email" 
-                        className="w-full bg-background/50 border border-white/10 rounded tracking-wide px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors placeholder:text-white/10"
-                        placeholder="UPLINK @ ADDRESS..."
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-mono text-primary/80 uppercase tracking-widest">Data Payload (Message)</label>
-                    <textarea 
-                      required
-                      name="message"
-                      rows="6"
-                      className="w-full bg-background/50 border border-white/10 rounded tracking-wide px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors resize-none placeholder:text-white/10"
-                      placeholder="ENTER CORE SEQUENCE..."
-                    ></textarea>
-                  </div>
-
-                  <button 
-                    disabled={formStatus === 'sending'}
-                    className={`w-full ${formStatus === 'sending' ? 'bg-primary/5 cursor-not-allowed opacity-50' : 'bg-primary/10 hover:bg-primary'} border border-primary text-primary hover:text-black font-display font-bold py-4 mt-4 flex items-center justify-center gap-3 transition-all duration-300 group overflow-hidden relative`}
+              <div className="grid grid-cols-1 gap-4">
+                {connectLinks.map((link) => (
+                  <motion.a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    onMouseEnter={() => setHoveredLink(link.id)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    whileHover={{ x: 10 }}
+                    className={`flex items-center justify-between p-5 glass-panel border border-white/5 hover:${link.borderColor} transition-all duration-300 group`}
                   >
-                    <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:animate-shimmer"></div>
-                    <span className="relative z-10 tracking-[0.2em]">{formStatus === 'sending' ? 'TRANSMITTING...' : 'INITIALIZE UPLINK'}</span>
-                    <Send className={`w-5 h-5 relative z-10 ${formStatus === 'sending' ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:-translate-y-1'} transition-transform`} />
-                  </button>
-                  
-                  {formStatus === 'error' && (
-                    <p className="text-red-400 text-[10px] font-mono mt-2 text-center uppercase tracking-widest">Critical Error: Transmission Interrupted. Try Again.</p>
-                  )}
-                </form>
-              </>
-            )}
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-lg bg-white/5 group-hover:bg-primary/10 transition-colors ${link.color}`}>
+                        {link.icon}
+                      </div>
+                      <div>
+                        <div className="text-white font-display font-bold text-sm tracking-widest uppercase">{link.name}</div>
+                        <div className="text-[10px] font-mono text-textMuted/60 uppercase">{link.label}</div>
+                      </div>
+                    </div>
+                    <ExternalLink className={`w-4 h-4 text-textMuted/40 group-hover:text-primary transition-colors ${hoveredLink === link.id ? 'opacity-100' : 'opacity-0 md:opacity-0 group-hover:opacity-100'}`} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative z-10 mt-12 pt-8 border-t border-white/5 flex items-center justify-between">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-mono text-primary/60 uppercase tracking-widest mb-1">Status</span>
+                <span className="text-xs text-white font-mono flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                  OPEN FOR OPPORTUNITIES
+                </span>
+              </div>
+              <div className="px-4 py-2 bg-primary/5 border border-primary/20 rounded text-[10px] font-mono text-primary uppercase tracking-[0.2em]">
+                SVNIT.ENGR.V3
+              </div>
+            </div>
           </motion.div>
 
         </div>

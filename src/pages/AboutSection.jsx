@@ -42,9 +42,9 @@ export default function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-display font-bold text-glow mb-6"
+            className="text-4xl md:text-5xl font-display font-bold text-glow mb-6 tracking-widest"
           >
-            SYSTEM ARHITECTURE
+            SYSTEM ARCHITECTURE
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, width: 0 }}
@@ -68,10 +68,10 @@ export default function AboutSection() {
             
             <h3 className="text-2xl font-display text-primary mb-4 font-semibold">Core Operating Parameters</h3>
             <p className="text-textMuted leading-relaxed mb-6">
-              I am driven by a profound passion for mechanical engineering and the endless possibilities of robotics. My approach to engineering is highly analytical, blending rigorous theoretical simulation with hands-on, iterative prototyping.
+              I am a 3rd year Mechanical Engineering student at Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat. My approach to engineering is highly analytical, blending rigorous theoretical simulation with hands-on, iterative prototyping.
             </p>
             <p className="text-textMuted leading-relaxed">
-              Whether it's designing a mind-controlled prosthetic arm using advanced EEG signals, simulating airflow in a complex turbofan engine, or engineering robust suspension systems, I strive to create solutions that are not only functional but elegantly optimized.
+              I am driven by a profound passion for mechanical systems and robotics. Whether it's designing a mind-controlled prosthetic arm using advanced EEG signals, simulating airflow in a complex turbofan engine, or engineering robust suspension systems, I strive to create solutions that are not only functional but elegantly optimized.
             </p>
             
             <div className="mt-8 flex items-center gap-4">

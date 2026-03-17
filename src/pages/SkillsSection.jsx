@@ -27,7 +27,7 @@ const skillCategories = [
       { name: "C / C++", level: 75 },
       { name: "SQL", level: 65 },
     ],
-    color: "bg-blue-500"
+    color: "bg-primary"
   }
 ];
 
@@ -35,7 +35,7 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute -right-[20%] top-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent -z-10 blur-2xl"></div>
+      {/* Background Decor Removed for all-black theme */}
 
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div
