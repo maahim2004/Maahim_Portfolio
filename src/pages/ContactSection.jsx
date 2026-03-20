@@ -11,7 +11,7 @@ export default function ContactSection() {
       name: 'LinkedIn',
       icon: <Linkedin className="w-5 h-5" />,
       label: 'Professional Network',
-      url: 'https://linkedin.com/in/maahim-patel', // Placeholder/Actual if known
+      url: 'https://www.linkedin.com/in/maahim-patel-a258302b1/', // User's LinkedIn profile
       color: 'text-[#0077b5]',
       borderColor: 'border-[#0077b5]/30'
     },

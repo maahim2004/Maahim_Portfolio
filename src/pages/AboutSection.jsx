@@ -30,21 +30,13 @@ export default function AboutSection() {
       <div className="container mx-auto px-6 max-w-7xl">
         
         <div className="flex flex-col items-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="px-4 py-1 border border-primary/30 rounded-full mb-4 text-primary text-xs font-mono"
-          >
-            SYS.FILE.READ("ABOUT_ME")
-          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-display font-bold text-glow mb-6 tracking-widest"
           >
-            SYSTEM ARCHITECTURE
+            ABOUT ME
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, width: 0 }}
@@ -66,7 +58,7 @@ export default function AboutSection() {
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
             
-            <h3 className="text-2xl font-display text-primary mb-4 font-semibold">Core Operating Parameters</h3>
+            <h3 className="text-2xl font-display text-primary mb-4 font-semibold">Engineering Profile</h3>
             <p className="text-textMuted leading-relaxed mb-6">
               I am a 3rd year Mechanical Engineering student at Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat. My approach to engineering is highly analytical, blending rigorous theoretical simulation with hands-on, iterative prototyping.
             </p>

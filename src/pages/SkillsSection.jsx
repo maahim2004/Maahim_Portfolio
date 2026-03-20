@@ -75,14 +75,11 @@ export default function SkillsSection() {
                     <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
                       {/* Progress Bar Fill */}
                       <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.2 + (idx * 0.1), ease: "easeOut" }}
+                        style={{ width: `${skill.level}%` }}
                         className={`h-full ${category.color} relative shadow-[0_0_10px_rgba(0,0,0,0.5)]`}
                       >
-                        {/* Shimmer effect inside bar */}
-                        <div className="absolute top-0 left-0 w-full h-full bg-white/20 animate-pulse"></div>
+                        {/* Shimmer effect inside bar (static) */}
+                        <div className="absolute top-0 left-0 w-full h-full bg-white/20"></div>
                       </motion.div>
                     </div>
                   </div>
