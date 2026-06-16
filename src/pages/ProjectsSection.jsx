@@ -3,7 +3,7 @@ import { ExternalLink, Database, Cpu, Cog, ChevronLeft, ChevronRight, X, Maximiz
 import { projects } from '../data/projects';import { Canvas } from '@react-three/fiber';
 import { useGLTF, Stage, OrbitControls } from '@react-three/drei';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -175,9 +175,11 @@ function ProjectModal({ project, isOpen, onClose }) {
                     <ambientLight intensity={0.5} />
                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                     <pointLight position={[-10, -10, -10]} intensity={0.5} color="#00E5FF" />
-                    <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
-                      <InteractiveModel url={models[activeIteration]} disableTransparency={project.disableTransparency} />
-                    </Stage>
+                    <Suspense fallback={null}>
+                      <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
+                        <InteractiveModel url={models[activeIteration]} disableTransparency={project.disableTransparency} />
+                      </Stage>
+                    </Suspense>
                     <OrbitControls autoRotate autoRotateSpeed={1} enableZoom={true} makeDefault />
                   </Canvas>
                   
