@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink, Database, Cpu, Cog, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
 import { projects } from '../data/projects';import { Canvas } from '@react-three/fiber';
-import { useGLTF, Stage, OrbitControls } from '@react-three/drei';
+import { useGLTF, Stage, OrbitControls, Html } from '@react-three/drei';
 
 import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
 import { useFrame } from '@react-three/fiber';
@@ -175,7 +175,14 @@ function ProjectModal({ project, isOpen, onClose }) {
                     <ambientLight intensity={0.5} />
                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                     <pointLight position={[-10, -10, -10]} intensity={0.5} color="#00E5FF" />
-                    <Suspense fallback={null}>
+                    <Suspense fallback={
+                      <Html center>
+                        <div className="flex flex-col items-center justify-center gap-3 w-48">
+                          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin shadow-[0_0_15px_#38bdf8]"></div>
+                          <span className="text-[9px] font-mono text-primary tracking-[0.2em] uppercase animate-pulse">Loading Model Analysis</span>
+                        </div>
+                      </Html>
+                    }>
                       <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
                         <InteractiveModel url={models[activeIteration]} disableTransparency={project.disableTransparency} />
                       </Stage>
@@ -309,6 +316,12 @@ const ProjectCard = ({ project, idx, onClick }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: idx * 0.1 }}
       onClick={() => onClick(project)}
+      onMouseEnter={() => {
+        const models = project.models || (project.modelPath ? [project.modelPath] : null);
+        if (models) {
+          models.forEach(url => useGLTF.preload(url));
+        }
+      }}
       className="group relative glass-panel overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-500 cursor-pointer"
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
@@ -365,6 +378,26 @@ const ProjectCard = ({ project, idx, onClick }) => {
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
+
+  // Progressive background preloading to speed up visual load times without crashing mobile browser memory
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      let delay = 0;
+      projects.forEach((project) => {
+        const models = project.models || (project.modelPath ? [project.modelPath] : null);
+        if (models) {
+          models.forEach((url) => {
+            setTimeout(() => {
+              useGLTF.preload(url);
+            }, delay);
+            delay += 2500; // Load one model file every 2.5 seconds to keep CPU and memory usage flat
+          });
+        }
+      });
+    }, 4000); // Start preloading 4 seconds after page load
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section id="projects" className="py-24 relative">
@@ -424,11 +457,4 @@ export default function ProjectsSection() {
   );
 }
 
-// Preload critical models
-projects.forEach(project => {
-  if (project.models) {
-    project.models.forEach(url => useGLTF.preload(url));
-  } else if (project.modelPath) {
-    useGLTF.preload(project.modelPath);
-  }
-});
+// Preloading disabled to save memory on mobile devices

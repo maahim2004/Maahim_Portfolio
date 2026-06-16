@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { useGLTF, Float, Environment } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -6,6 +6,18 @@ import * as THREE from 'three';
 function Model() {
   const { scene } = useGLTF('/models/turbofan_it_2.glb');
   const modelRef = useRef();
+
+  // Dynamic detection of mobile viewport width
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Clone the scene and apply materials for a cinematic, semi-transparent aerospace look
   const clonedScene = useMemo(() => {
@@ -21,16 +33,28 @@ function Model() {
                              name === "object_2" || name === "mesh_0" || name === "object_0";
 
         if (isOuterShell) {
-          child.material = new THREE.MeshPhysicalMaterial({
-            color: '#111111',
-            metalness: 0.9,
-            roughness: 0.1,
-            transmission: 0.95,
-            thickness: 2.0,
-            transparent: true,
-            opacity: 0.1, 
-            side: THREE.DoubleSide,
-          });
+          if (isMobile) {
+            // Simplified standard material for mobile devices to avoid expensive transmission rendering
+            child.material = new THREE.MeshStandardMaterial({
+              color: '#222222',
+              metalness: 0.8,
+              roughness: 0.2,
+              transparent: true,
+              opacity: 0.2,
+              side: THREE.DoubleSide,
+            });
+          } else {
+            child.material = new THREE.MeshPhysicalMaterial({
+              color: '#111111',
+              metalness: 0.9,
+              roughness: 0.1,
+              transmission: 0.95,
+              thickness: 2.0,
+              transparent: true,
+              opacity: 0.1, 
+              side: THREE.DoubleSide,
+            });
+          }
         } else {
           // Metallic internal components - slightly transparent as requested
           child.material = new THREE.MeshStandardMaterial({
@@ -49,7 +73,7 @@ function Model() {
       }
     });
     return clone;
-  }, [scene]);
+  }, [scene, isMobile]);
 
   // Slow automatic rotation on Y axis
   useFrame((state, delta) => {
@@ -58,7 +82,11 @@ function Model() {
     }
   });
 
-  return <primitive ref={modelRef} object={clonedScene} scale={2.5} position={[2, -1, 0]} rotation={[0.4, 0, 0.2]} />;
+  // Dynamically position and scale turbofan for mobile/desktop
+  const scale = isMobile ? 1.3 : 2.5;
+  const position = isMobile ? [0, -1.3, 0] : [2, -1, 0];
+
+  return <primitive ref={modelRef} object={clonedScene} scale={scale} position={position} rotation={[0.4, 0, 0.2]} />;
 }
 
 export default function HeroTurbofan() {
