@@ -1,22 +1,10 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { FileText, ExternalLink } from 'lucide-react';
-import { Html } from '@react-three/drei';
-import HeroTurbofan from '../components/3d/HeroTurbofan';
 import HeroEffects from '../components/3d/HeroEffects';
 
 export default function HeroSection() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Parallax and fade effects for smooth transition
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
     <section 
@@ -26,28 +14,6 @@ export default function HeroSection() {
     >
       {/* Background Effects Layer */}
       <HeroEffects />
-      
-      {/* 3D Turbofan Visualization Layer */}
-      <motion.div style={{ y, scale, opacity }} className="absolute inset-0 z-0">
-        <Canvas 
-          shadows 
-          camera={{ position: [0, 0, 10], fov: 35 }}
-          gl={{ antialias: true, alpha: true }}
-          dpr={[1, 1.5]}
-          frameloop="always" 
-        >
-          <Suspense fallback={
-            <Html center>
-              <div className="flex flex-col items-center justify-center gap-3 w-48">
-                <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin shadow-[0_0_15px_#38bdf8]"></div>
-                <span className="text-[10px] font-mono text-primary tracking-[0.3em] uppercase animate-pulse">Initializing 3D Core</span>
-              </div>
-            </Html>
-          }>
-            <HeroTurbofan />
-          </Suspense>
-        </Canvas>
-      </motion.div>
 
 
       {/* Main Content Overlay */}
