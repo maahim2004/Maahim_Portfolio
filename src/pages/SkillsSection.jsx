@@ -4,30 +4,41 @@ const skillCategories = [
   {
     title: "CAD & Design",
     skills: [
-      { name: "SolidWorks", level: 90 },
+      { name: "SolidWorks", level: 92 },
       { name: "AutoCAD", level: 85 },
       { name: "Blender", level: 70 },
     ],
     color: "bg-primary"
   },
   {
-    title: "Simulation & Analysis",
+    title: "Simulation & Software",
     skills: [
-      { name: "ANSYS Fluent", level: 85 },
-      { name: "CoolPack", level: 80 },
-      { name: "Design Expert", level: 75 },
+      { name: "ANSYS Fluent (CFD)", level: 85 },
+      { name: "DWSIM & HAZOP", level: 82 },
+      { name: "CoolPack & Design Expert", level: 80 },
+      { name: "MATLAB Pipelines", level: 88 },
     ],
     color: "bg-secondary"
   },
   {
-    title: "Programming",
+    title: "Standards & Engineering",
     skills: [
-      { name: "MATLAB", level: 85 },
-      { name: "Python", level: 80 },
-      { name: "C / C++", level: 75 },
-      { name: "SQL", level: 65 },
+      { name: "ASME PTC 4 / PTC 6", level: 90 },
+      { name: "ASME BPVC Sec. VIII Div. 2", level: 85 },
+      { name: "P&ID & Heat/Mass Balance", level: 88 },
+      { name: "HEI Standards", level: 82 },
     ],
     color: "bg-primary"
+  },
+  {
+    title: "Programming & Embedded",
+    skills: [
+      { name: "MATLAB", level: 88 },
+      { name: "Python", level: 80 },
+      { name: "C / C++", level: 75 },
+      { name: "Arduino & Raspberry Pi", level: 82 },
+    ],
+    color: "bg-secondary"
   }
 ];
 

@@ -60,7 +60,7 @@ export default function AboutSection() {
             
             <h3 className="text-2xl font-display text-primary mb-4 font-semibold">Engineering Profile</h3>
             <p className="text-textMuted leading-relaxed mb-6">
-              I am a 3rd year Mechanical Engineering student at Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat. My approach to engineering is highly analytical, blending rigorous theoretical simulation with hands-on, iterative prototyping.
+              I am a Final year Mechanical Engineering student at Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat. My approach to engineering is highly analytical, blending rigorous theoretical simulation with hands-on, iterative prototyping.
             </p>
             <p className="text-textMuted leading-relaxed">
               I am driven by a profound passion for mechanical systems and robotics. Whether it's designing a mind-controlled prosthetic arm using advanced EEG signals, simulating airflow in a complex turbofan engine, or engineering robust suspension systems, I strive to create solutions that are not only functional but elegantly optimized.

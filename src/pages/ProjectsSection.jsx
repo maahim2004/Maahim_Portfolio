@@ -1,11 +1,20 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ExternalLink, Database, Cpu, Cog, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
-import { projects } from '../data/projects';import { Canvas } from '@react-three/fiber';
+import { projects } from '../data/projects';
+import { Canvas } from '@react-three/fiber';
 import { useGLTF, Stage, OrbitControls, Html } from '@react-three/drei';
 
 import { useState, useRef, useEffect, useMemo, Suspense } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+
+// Preload all 3D project models in background memory for instant modal load times
+projects.forEach((project) => {
+  const modelList = project.models || (project.modelPath ? [project.modelPath] : []);
+  modelList.forEach((url) => {
+    if (url) useGLTF.preload(url);
+  });
+});
 
 function InteractiveModel({ url, disableTransparency = false }) {
   const { scene } = useGLTF(url);

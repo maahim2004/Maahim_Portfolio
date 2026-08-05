@@ -48,8 +48,8 @@ function Model({ scrollProgress }) {
         const isOuterShell = outerKeywords.some(key => name.includes(key)) || 
                              name === "object_2" || name === "mesh_0" || name === "object_0";
 
-        // Identify the central main shaft components
-        const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central'];
+        // Identify the central main shaft/core components
+        const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central', 'filler', 'stator'];
         const isShaft = shaftKeywords.some(key => name.includes(key));
 
         if (isOuterShell) {
@@ -227,7 +227,7 @@ function Model({ scrollProgress }) {
           const name = child.name.toLowerCase();
           
           // Central main shaft check
-          const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central'];
+          const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central', 'filler', 'stator'];
           const isShaft = shaftKeywords.some(key => name.includes(key));
           
           if (isShaft) {
@@ -261,7 +261,7 @@ function Model({ scrollProgress }) {
           const outerKeywords = ['outer', 'shell', 'case', 'housing', 'cover', 'body', 'fan_cowl', 'nacelle', 'casing', 'capsule', 'frame'];
           const isOuterShell = outerKeywords.some(key => name.includes(key)) || 
                                name === "object_2" || name === "mesh_0" || name === "object_0";
-          const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central'];
+          const shaftKeywords = ['shaft', 'spool', 'axis', 'bearing', 'core', 'center_shaft', 'central', 'filler', 'stator'];
           const isShaft = shaftKeywords.some(key => name.includes(key));
 
           if (!isOuterShell && !isShaft) {

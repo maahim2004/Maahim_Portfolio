@@ -1,30 +1,48 @@
 import { motion } from 'framer-motion';
-import { Microscope, Beaker, FileSearch } from 'lucide-react';
+import { Factory, Microscope, Beaker, Calendar, Building2 } from 'lucide-react';
 
 const experiences = [
   {
-    title: "Pulsating Heat Pipe Solar Still",
-    type: "Research Project",
-    icon: <Beaker className="w-6 h-6 text-primary" />,
-    role: "Assembly, Design Validation & Performance Testing",
-    description: "Developed and evaluated a hybrid pyramidal solar still desalination system to improve freshwater yield.",
-    image: "/images/MPSS.png",
+    title: "Process Design Intern — BTG Department",
+    company: "Adani Infra (India) Limited • Energy Business Division, Ahmedabad",
+    type: "Industry Experience",
+    period: "May 2026 – July 2026",
+    icon: <Factory className="w-6 h-6 text-primary" />,
+    role: "Energy Engineering Group",
+    badgeColor: "border-primary/40 bg-primary/10 text-primary shadow-glow-primary",
+    description: "Gained comprehensive BTG (Boiler-Turbine-Generator) thermal power plant system exposure, conducting standards compliance, performance modelling, and safety simulations.",
     points: [
-      "Led the mechanical assembly and structural validation of the pyramidal structure.",
-      "Conducted extensive performance testing and thermodynamic calculations.",
-      "Analyzed heat transfer data to optimize the pulsating heat pipe dynamics."
+      "Reviewed live P&IDs and Heat & Mass Balance Diagrams across multiple thermal power plant projects against ASME BPVC Section VIII Div. 2, HEI, ASME PTC 4, and PTC 6 standards; gained full BTG (Boiler-Turbine-Generator) system exposure.",
+      "Built ASME PTC 4 and PTC 6 performance test models in MATLAB and Excel for efficiency benchmarking and acceptance testing of thermal power plant equipment.",
+      "Executed a HAZOP simulation in DWSIM for a Rankine cycle with sensitivity analysis on pump outlet pressure; prepared Design Basis Reports, Document Control Index, scope matrices, and interface mapping documents."
     ]
   },
   {
-    title: "VCRS Exergy Analysis",
-    type: "Experimental Research",
+    title: "Exergy Analysis & VCRS Enhancement",
+    company: "SVNIT Surat • Thermal & Refrigeration Systems Lab",
+    type: "Summer Research Internship",
+    period: "May 2025 – July 2025",
     icon: <Microscope className="w-6 h-6 text-secondary" />,
-    role: "Performance Enhancement Researcher",
-    description: "Investigated the performance augmentation of a Vapor Compression Refrigeration System (VCRS) using Al2O3 nanoparticles.",
+    role: "Research Intern",
+    badgeColor: "border-secondary/40 bg-secondary/10 text-secondary shadow-glow-secondary",
+    description: "Investigated performance augmentation of Vapor Compression Refrigeration Systems (VCRS) using Al₂O₃ nanoparticles.",
     points: [
-      "Synthesized and stabilized nanoparticle-lubricant mixtures for the compressor.",
-      "Utilized MATLAB and CoolPack for complex exergy destruction analysis and COP calculations.",
-      "Applied Design Expert (DOE) to determine the optimal nanoparticle concentration for maximum efficiency."
+      "Conducted experimental research on VCRS performance enhancement via Al₂O₃ nanoparticle addition across 2 independent rigs over 8 weeks; validated results with CoolPack and Design Expert using response surface methodology.",
+      "Built MATLAB data pipelines to process 5+ operating-condition datasets and generate publication-quality exergy performance visualisations."
+    ]
+  },
+  {
+    title: "PHP-Based Solar Still Desalination",
+    company: "SVNIT Surat • Renewable Thermal Systems Lab",
+    type: "Winter Research Internship",
+    period: "January 2025 – March 2025",
+    icon: <Beaker className="w-6 h-6 text-primary" />,
+    role: "Research Intern",
+    badgeColor: "border-primary/40 bg-primary/10 text-primary shadow-glow-primary",
+    description: "Developed and evaluated a Pulsating Heat Pipe (PHP)-based Hybrid Pyramidal Solar Still for high-efficiency freshwater yield.",
+    image: "/images/MPSS.png",
+    points: [
+      "Competitively selected to develop a Pulsating Heat Pipe (PHP)-based Hybrid Pyramidal Solar Still; contributed to assembly, design validation, performance testing, and efficiency calculations over a 2-month experimental campaign."
     ]
   }
 ];
@@ -42,56 +60,61 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-textMuted mb-4"
+            className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-textMuted mb-4 tracking-widest uppercase"
           >
-            RESEARCH & ANALYSIS
+            INDUSTRY & RESEARCH EXPERIENCE
           </motion.h2>
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-sm"
+            className="text-primary font-mono text-sm tracking-[0.25em] uppercase"
           >
-            VALIDATING THEORIES THROUGH EMPIRICAL DATA
+            THERMAL POWER ENGINEERING • APPLIED RESEARCH • SIMULATION
           </motion.div>
         </div>
 
-        <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/20 before:to-transparent">
+        <div className="space-y-16 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/20 before:to-transparent">
           {experiences.map((exp, index) => {
-            const isFirst = index === 0;
-            // Even index (0, 2): Image/Spacer on Left, Card on Right
-             // Odd index (1, 3): Card on Left, Image/Spacer on Right
             const isReversed = index % 2 !== 0; 
             return (
               <div key={index} className={`relative flex flex-col md:flex-row items-center justify-between ${isReversed ? 'md:flex-row-reverse' : ''} group is-active`}>
                 
                 {/* Timeline dot */}
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-background shadow shrink-0 z-10 
-                  md:absolute md:left-1/2 md:-translate-x-1/2 group-hover:border-primary/50 group-hover:shadow-glow transition-all`}>
+                <div className={`flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black shadow shrink-0 z-10 
+                  md:absolute md:left-1/2 md:-translate-x-1/2 group-hover:border-primary/80 group-hover:shadow-glow transition-all`}>
                   {exp.icon}
                 </div>
                 
-                {/* Visual Content (Image) */}
-                {exp.image && (
+                {/* Visual Content (Image or Company Badge Spacer) */}
+                {exp.image ? (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95, x: -30 }}
+                    initial={{ opacity: 0, scale: 0.95, x: isReversed ? 30 : -30 }}
                     whileInView={{ opacity: 1, scale: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="hidden md:block w-[calc(50%-4rem)] order-1"
                   >
-                    <div className="relative group/img rounded-lg overflow-hidden border border-white/10 bg-white/[0.02] shadow-2xl">
-                        <img 
-                          src={exp.image} 
-                          alt={exp.title} 
-                          className="w-full h-auto object-cover transform group-hover/img:scale-105 transition-transform duration-700"
-                        />
+                    <div className="relative group/img rounded-xl overflow-hidden border border-white/10 bg-white/[0.02] shadow-2xl">
+                      <img 
+                        src={exp.image} 
+                        alt={exp.title} 
+                        className="w-full h-auto object-cover transform group-hover/img:scale-105 transition-transform duration-700"
+                      />
                     </div>
                   </motion.div>
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0, x: isReversed ? 30 : -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="hidden md:flex w-[calc(50%-4rem)] order-1 flex-col items-center justify-center p-6 border border-white/5 rounded-xl bg-white/[0.01]"
+                  >
+                    <Building2 className="w-10 h-10 text-primary/40 mb-2" />
+                    <span className="text-xs font-mono text-white/50 text-center tracking-widest uppercase">{exp.company}</span>
+                  </motion.div>
                 )}
-
-                {/* Empty spacer for alternating items */}
-                {!exp.image && <div className="hidden md:block w-[calc(50%-4rem)] order-1"></div>}
 
                 {/* Content Box */}
                 <motion.div
@@ -99,34 +122,40 @@ export default function ExperienceSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                  className="w-full mt-4 md:mt-0 md:w-[calc(50%-4rem)] glass-panel p-6 group-hover:border-primary/30 transition-colors order-2 relative overflow-hidden"
+                  className="w-full mt-6 md:mt-0 md:w-[calc(50%-4rem)] glass-panel p-6 md:p-8 group-hover:border-primary/40 transition-all order-2 relative overflow-hidden"
                 >
                   {/* Subtle glass shine effect */}
                   <div className="absolute -top-[100%] -left-[100%] w-[300%] h-[300%] bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none rotate-12 group-hover:translate-x-[10%] group-hover:translate-y-[10%] transition-transform duration-1000"></div>
 
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-mono text-secondary tracking-widest uppercase">{exp.type}</span>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span className={`text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border ${exp.badgeColor}`}>
+                      {exp.type}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-textMuted">
+                      <Calendar className="w-3.5 h-3.5 text-primary/70" />
+                      <span>{exp.period}</span>
+                    </div>
                   </div>
                   
-                  <h3 className="text-xl font-display font-bold text-white mb-2 tracking-tight">{exp.title}</h3>
-                  <h4 className="text-sm font-medium text-primary/90 mb-4 font-mono tracking-wider">{exp.role}</h4>
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-1 tracking-tight">{exp.title}</h3>
+                  <div className="text-xs font-mono text-primary mb-3">{exp.company}</div>
                   
-                  {/* Mobile Image */}
+                  {/* Mobile Image if available */}
                   {exp.image && (
                     <div className="md:hidden mb-6 rounded-lg overflow-hidden border border-white/10 shadow-lg">
                        <img src={exp.image} alt={exp.title} className="w-full h-auto" />
                     </div>
                   )}
 
-                  <p className="text-textMuted mb-6 text-sm leading-relaxed border-l-2 border-primary/20 pl-4 italic">
+                  <p className="text-textMuted mb-6 text-sm leading-relaxed border-l-2 border-primary/30 pl-4 italic">
                     "{exp.description}"
                   </p>
                   
                   <ul className="space-y-3">
                     {exp.points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-4 text-[13px] text-textMuted/90 group/point">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/30 mt-1.5 shrink-0 group-hover/point:bg-primary/80 transition-colors"></div>
-                        <span className="leading-snug">{point}</span>
+                      <li key={i} className="flex items-start gap-3 text-[13px] text-textMuted/90 group/point">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary/40 mt-1.5 shrink-0 group-hover/point:bg-primary transition-colors"></div>
+                        <span className="leading-relaxed">{point}</span>
                       </li>
                     ))}
                   </ul>

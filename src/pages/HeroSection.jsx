@@ -51,7 +51,7 @@ export default function HeroSection() {
               transition={{ delay: 1 }}
               className="text-xl md:text-2xl text-secondary font-display tracking-[0.2em] md:tracking-[0.4em] uppercase font-bold"
             >
-              3rd Year Mechanical Major @ SVNIT Surat | CAD | Turbomachinery
+              Final Year Mechanical Major @ SVNIT Surat | CAD | Turbomachinery
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
