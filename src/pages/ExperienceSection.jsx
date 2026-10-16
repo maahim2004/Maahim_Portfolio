@@ -7,10 +7,11 @@ const experiences = [
     company: "Adani Infra (India) Limited • Energy Business Division, Ahmedabad",
     type: "Industry Experience",
     period: "May 2026 – July 2026",
-    icon: <Factory className="w-6 h-6 text-primary" />,
+    icon: <Factory className="w-5 h-5 text-primary" />,
     role: "Energy Engineering Group",
-    badgeColor: "border-primary/40 bg-primary/10 text-primary shadow-glow-primary",
+    badgeColor: "border-primary/30 bg-primary/10 text-primary font-bold",
     description: "Gained comprehensive BTG (Boiler-Turbine-Generator) thermal power plant system exposure, conducting standards compliance, performance modelling, and safety simulations.",
+    image: "/images/adani_collage.png",
     points: [
       "Reviewed live P&IDs and Heat & Mass Balance Diagrams across multiple thermal power plant projects against ASME BPVC Section VIII Div. 2, HEI, ASME PTC 4, and PTC 6 standards; gained full BTG (Boiler-Turbine-Generator) system exposure.",
       "Built ASME PTC 4 and PTC 6 performance test models in MATLAB and Excel for efficiency benchmarking and acceptance testing of thermal power plant equipment.",
@@ -22,9 +23,9 @@ const experiences = [
     company: "SVNIT Surat • Thermal & Refrigeration Systems Lab",
     type: "Summer Research Internship",
     period: "May 2025 – July 2025",
-    icon: <Microscope className="w-6 h-6 text-secondary" />,
+    icon: <Microscope className="w-5 h-5 text-primary" />,
     role: "Research Intern",
-    badgeColor: "border-secondary/40 bg-secondary/10 text-secondary shadow-glow-secondary",
+    badgeColor: "border-borderLight bg-surfaceMuted text-textDefault font-bold",
     description: "Investigated performance augmentation of Vapor Compression Refrigeration Systems (VCRS) using Al₂O₃ nanoparticles.",
     points: [
       "Conducted experimental research on VCRS performance enhancement via Al₂O₃ nanoparticle addition across 2 independent rigs over 8 weeks; validated results with CoolPack and Design Expert using response surface methodology.",
@@ -36,9 +37,9 @@ const experiences = [
     company: "SVNIT Surat • Renewable Thermal Systems Lab",
     type: "Winter Research Internship",
     period: "January 2025 – March 2025",
-    icon: <Beaker className="w-6 h-6 text-primary" />,
+    icon: <Beaker className="w-5 h-5 text-primary" />,
     role: "Research Intern",
-    badgeColor: "border-primary/40 bg-primary/10 text-primary shadow-glow-primary",
+    badgeColor: "border-primary/30 bg-primary/10 text-primary font-bold",
     description: "Developed and evaluated a Pulsating Heat Pipe (PHP)-based Hybrid Pyramidal Solar Still for high-efficiency freshwater yield.",
     image: "/images/MPSS.png",
     points: [
@@ -49,40 +50,39 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 relative bg-background border-y border-white/5 mt-10 overflow-hidden">
-      {/* Background Section Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-      
+    <section id="experience" className="py-24 relative mt-10 overflow-hidden">
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-textMuted mb-4 tracking-widest uppercase"
-          >
-            INDUSTRY & RESEARCH EXPERIENCE
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-primary font-mono text-sm tracking-[0.25em] uppercase"
-          >
-            THERMAL POWER ENGINEERING • APPLIED RESEARCH • SIMULATION
-          </motion.div>
+        {/* Section Header */}
+        <div className="flex flex-col items-start mb-16 border-b border-borderLight pb-8">
+          <div className="flex items-center gap-2 mb-2 text-xs font-mono uppercase tracking-widest text-primary font-bold">
+            <span>[03]</span>
+            <span>PROFESSIONAL CHRONOLOGY</span>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-display font-extrabold uppercase text-textDefault tracking-tight"
+            >
+              EXPERIENCE
+            </motion.h2>
+            <span className="text-xs font-mono uppercase tracking-widest text-textMuted">
+              THERMAL POWER • STANDARDS COMPLIANCE • APPLIED RESEARCH
+            </span>
+          </div>
         </div>
 
-        <div className="space-y-16 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/20 before:to-transparent">
+        <div className="space-y-16 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-borderLight before:to-transparent">
           {experiences.map((exp, index) => {
             const isReversed = index % 2 !== 0; 
             return (
               <div key={index} className={`relative flex flex-col md:flex-row items-center justify-between ${isReversed ? 'md:flex-row-reverse' : ''} group is-active`}>
                 
                 {/* Timeline dot */}
-                <div className={`flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black shadow shrink-0 z-10 
-                  md:absolute md:left-1/2 md:-translate-x-1/2 group-hover:border-primary/80 group-hover:shadow-glow transition-all`}>
+                <div className="flex items-center justify-center w-11 h-11 rounded-full border-2 border-primary bg-white shadow-paper shrink-0 z-10 
+                  md:absolute md:left-1/2 md:-translate-x-1/2 group-hover:scale-110 transition-transform">
                   {exp.icon}
                 </div>
                 
@@ -95,11 +95,11 @@ export default function ExperienceSection() {
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="hidden md:block w-[calc(50%-4rem)] order-1"
                   >
-                    <div className="relative group/img rounded-xl overflow-hidden border border-white/10 bg-white/[0.02] shadow-2xl">
+                    <div className="relative group/img rounded-2xl overflow-hidden border border-borderLight bg-white shadow-paper">
                       <img 
                         src={exp.image} 
                         alt={exp.title} 
-                        className="w-full h-auto object-cover transform group-hover/img:scale-105 transition-transform duration-700"
+                        className="w-full h-auto object-cover transform group-hover/img:scale-[1.02] transition-transform duration-500"
                       />
                     </div>
                   </motion.div>
@@ -109,10 +109,10 @@ export default function ExperienceSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="hidden md:flex w-[calc(50%-4rem)] order-1 flex-col items-center justify-center p-6 border border-white/5 rounded-xl bg-white/[0.01]"
+                    className="hidden md:flex w-[calc(50%-4rem)] order-1 flex-col items-center justify-center p-8 border border-borderLight rounded-2xl bg-white/60 shadow-paper"
                   >
-                    <Building2 className="w-10 h-10 text-primary/40 mb-2" />
-                    <span className="text-xs font-mono text-white/50 text-center tracking-widest uppercase">{exp.company}</span>
+                    <Building2 className="w-10 h-10 text-primary mb-2" />
+                    <span className="text-xs font-mono text-textMuted text-center tracking-widest uppercase font-bold">{exp.company}</span>
                   </motion.div>
                 )}
 
@@ -122,40 +122,37 @@ export default function ExperienceSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                  className="w-full mt-6 md:mt-0 md:w-[calc(50%-4rem)] glass-panel p-6 md:p-8 group-hover:border-primary/40 transition-all order-2 relative overflow-hidden"
+                  className="w-full mt-6 md:mt-0 md:w-[calc(50%-4rem)] bg-white/95 backdrop-blur-sm border border-borderLight rounded-2xl p-6 md:p-8 shadow-paper group-hover:border-primary/50 group-hover:shadow-paper-lg transition-all order-2 relative overflow-hidden"
                 >
-                  {/* Subtle glass shine effect */}
-                  <div className="absolute -top-[100%] -left-[100%] w-[300%] h-[300%] bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none rotate-12 group-hover:translate-x-[10%] group-hover:translate-y-[10%] transition-transform duration-1000"></div>
-
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <span className={`text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border ${exp.badgeColor}`}>
                       {exp.type}
                     </span>
                     <div className="flex items-center gap-1.5 text-xs font-mono text-textMuted">
-                      <Calendar className="w-3.5 h-3.5 text-primary/70" />
+                      <Calendar className="w-3.5 h-3.5 text-primary" />
                       <span>{exp.period}</span>
                     </div>
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-1 tracking-tight">{exp.title}</h3>
-                  <div className="text-xs font-mono text-primary mb-3">{exp.company}</div>
+                  <h3 className="text-lg md:text-xl font-display font-bold text-textDefault mb-1 tracking-tight uppercase">{exp.title}</h3>
+                  <div className="text-xs font-mono text-primary font-bold mb-3">{exp.company}</div>
                   
                   {/* Mobile Image if available */}
                   {exp.image && (
-                    <div className="md:hidden mb-6 rounded-lg overflow-hidden border border-white/10 shadow-lg">
+                    <div className="md:hidden mb-6 rounded-xl overflow-hidden border border-borderLight shadow-paper">
                        <img src={exp.image} alt={exp.title} className="w-full h-auto" />
                     </div>
                   )}
 
-                  <p className="text-textMuted mb-6 text-sm leading-relaxed border-l-2 border-primary/30 pl-4 italic">
+                  <p className="text-textMuted mb-6 text-xs sm:text-sm leading-relaxed border-l-2 border-primary bg-primary/5 py-2 pl-3 rounded-r-lg">
                     "{exp.description}"
                   </p>
                   
                   <ul className="space-y-3">
                     {exp.points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[13px] text-textMuted/90 group/point">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/40 mt-1.5 shrink-0 group-hover/point:bg-primary transition-colors"></div>
-                        <span className="leading-relaxed">{point}</span>
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-[13px] text-textMuted leading-relaxed">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0"></div>
+                        <span>{point}</span>
                       </li>
                     ))}
                   </ul>

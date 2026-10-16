@@ -54,44 +54,44 @@ function Model({ scrollProgress }) {
 
         if (isOuterShell) {
           if (isMobile) {
-            // Simplified standard material for mobile devices to avoid expensive transmission rendering
+            // Simplified architectural wireframe for mobile
             child.material = new THREE.MeshStandardMaterial({
-              color: '#38bdf8',
+              color: '#8e877c', // Softer warm drafting line
               wireframe: true,
               transparent: true,
-              opacity: 0.15,
+              opacity: 0.12,
               side: THREE.DoubleSide,
             });
           } else {
             child.material = new THREE.MeshPhysicalMaterial({
-              color: '#38bdf8',
+              color: '#8e877c',
               wireframe: true,
               transparent: true,
-              opacity: 0.12, 
+              opacity: 0.10, 
               side: THREE.DoubleSide,
             });
           }
         } else if (isShaft) {
-          // Main central shaft - solid metal backbone for engine skeleton structural contrast
+          // Main central shaft - solid machined gunmetal/titanium
           child.material = new THREE.MeshStandardMaterial({
-            color: '#888888',
-            metalness: 1.0,
-            roughness: 0.4,
+            color: '#2a2a2e',
+            metalness: 0.95,
+            roughness: 0.3,
             transparent: false,
             opacity: 1.0,
-            emissive: new THREE.Color("#00F0FF"),
-            emissiveIntensity: 0.05,
+            emissive: new THREE.Color("#D40028"),
+            emissiveIntensity: 0.08,
           });
         } else {
-          // Metallic internal components - slightly transparent as requested
+          // Machined aerospace blades - satin titanium with subtle candy red reflection
           child.material = new THREE.MeshStandardMaterial({
-            color: '#ffffff',
-            metalness: 1.0,
-            roughness: 0.2,
-            envMapIntensity: 1.2,
+            color: '#38383c',
+            metalness: 0.85,
+            roughness: 0.25,
+            envMapIntensity: 1.0,
             transparent: true,
-            opacity: 0.08, // Set a lower default opacity for clear reading
-            emissive: new THREE.Color("#00F0FF"),
+            opacity: 0.12, // Subtle technical transparency
+            emissive: new THREE.Color("#D40028"),
             emissiveIntensity: 0.05,
           });
         }
@@ -282,13 +282,14 @@ function Model({ scrollProgress }) {
 export default function HeroTurbofan({ scrollProgress }) {
   return (
     <group>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.4}>
         <Model scrollProgress={scrollProgress} />
       </Float>
-      <Environment preset="night" />
-      <ambientLight intensity={0.1} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#00F0FF" castShadow />
-      <pointLight position={[-5, 5, -5]} intensity={1} color="#FF6E00" />
+      <Environment preset="city" />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[10, 15, 10]} intensity={1.8} color="#FFFFFF" castShadow />
+      <pointLight position={[-8, 6, -5]} intensity={2.0} color="#D40028" />
+      <pointLight position={[6, -6, 5]} intensity={0.8} color="#FFE6CC" />
     </group>
   );
 }

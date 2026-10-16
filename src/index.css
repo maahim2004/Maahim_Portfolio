@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,57 +9,82 @@
     @apply bg-background text-textDefault font-sans antialiased overflow-x-hidden;
     margin: 0;
     min-height: 100vh;
+    background-color: #FAF8F2;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold tracking-[0.1em] uppercase;
+    @apply font-display tracking-tight text-textDefault;
   }
 }
 
 @layer utilities {
+  /* Architectural & Editorial Paper Panels */
+  .paper-panel {
+    @apply bg-white/95 backdrop-blur-sm border border-borderLight shadow-paper rounded-xl;
+  }
+  
+  .paper-panel-hover {
+    @apply hover:border-primary/60 hover:shadow-paper-lg transition-all duration-300;
+  }
+
+  /* Backward compatibility alias for glass-panel across components */
   .glass-panel {
-    @apply bg-surface backdrop-blur-md border border-white/10 shadow-glass rounded-xl;
+    @apply bg-white/90 backdrop-blur-sm border border-borderLight shadow-paper rounded-xl;
   }
   
   .glass-panel-hover {
-    @apply hover:bg-surfaceHover hover:border-primary/50 hover:shadow-glow transition-all duration-300;
-  }
-  
-  .text-glow {
-    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); /* Glow Accent */
-  }
-  
-  .text-glow-orange {
-    text-shadow: 0 0 10px rgba(255, 110, 0, 0.5);
+    @apply hover:border-primary/60 hover:shadow-paper-md transition-all duration-300;
   }
 
-  .blueprint-grid {
+  .text-glow {
+    text-shadow: none;
+  }
+
+  /* Architectural Drafting Paper Grids */
+  .drafting-grid {
     background-image: 
-      linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
+      linear-gradient(rgba(24, 24, 27, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 24, 27, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+  }
+
+  .drafting-grid-fine {
+    background-image: 
+      linear-gradient(rgba(24, 24, 27, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 24, 27, 0.03) 1px, transparent 1px);
+    background-size: 16px 16px;
+    background-position: center center;
+  }
+
+  .drafting-dots {
+    background-image: radial-gradient(rgba(24, 24, 27, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
     background-position: center center;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Architectural Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  background: #F4EFE6;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/30 rounded-full border border-primary/20;
+  background: #D5CDC0;
+  border-radius: 4px;
+  border: 2px solid #F4EFE6;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/60 shadow-glow;
+  background: #D40028;
 }
 
-/* Base element styles */
+/* Base selection styles */
 ::selection {
-  @apply bg-primary/20 text-white;
+  background-color: #D40028;
+  color: #FFFFFF;
 }

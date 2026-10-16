@@ -67,8 +67,8 @@ function InteractiveModel({ url, disableTransparency = false }) {
         }
 
         if (hovered && !wireframe) {
-          mat.emissive = new THREE.Color("#00E5FF"); // Glow Accent
-          mat.emissiveIntensity = 0.2;
+          mat.emissive = new THREE.Color("#D40028"); // Candy Apple Red Accent
+          mat.emissiveIntensity = 0.25;
         } else {
            mat.emissive = new THREE.Color(0x000000);
            mat.emissiveIntensity = 0;
@@ -104,9 +104,9 @@ function InteractiveModel({ url, disableTransparency = false }) {
 }
 
 const IconMap = {
-  cpu: <Cpu className="w-8 h-8 text-primary" />,
-  cog: <Cog className="w-8 h-8 text-secondary" />,
-  database: <Database className="w-8 h-8 text-primary" />
+  cpu: <Cpu className="w-7 h-7 text-primary" />,
+  cog: <Cog className="w-7 h-7 text-primary" />,
+  database: <Database className="w-7 h-7 text-primary" />
 };
 
 function ProjectModal({ project, isOpen, onClose }) {
@@ -139,38 +139,39 @@ function ProjectModal({ project, isOpen, onClose }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/75 backdrop-blur-md"
         onClick={onClose}
       >
         <motion.div 
-          initial={{ scale: 0.9, y: 20, opacity: 0 }}
+          initial={{ scale: 0.95, y: 20, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
-          exit={{ scale: 0.9, y: 20, opacity: 0 }}
-          className="relative w-full max-w-6xl max-h-[90vh] glass-panel overflow-hidden border border-white/10 flex flex-col md:flex-row"
+          exit={{ scale: 0.95, y: 20, opacity: 0 }}
+          className="relative w-full max-w-6xl max-h-[90vh] bg-[#FAF8F2] rounded-2xl overflow-hidden border border-borderLight shadow-2xl flex flex-col md:flex-row"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 z-[110] p-2 bg-black/50 hover:bg-primary/20 rounded-full border border-white/10 text-white transition-all shadow-glow-primary"
+            className="absolute top-4 right-4 z-[110] p-2.5 bg-white hover:bg-primary hover:text-white rounded-full border border-borderLight text-textDefault transition-all shadow-paper"
+            aria-label="Close modal"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
 
           {/* Left: 3D Model / Photos Viewport */}
-          <div className="w-full md:w-3/5 h-[400px] md:h-auto bg-black/40 relative border-b md:border-b-0 md:border-r border-white/5 flex flex-col">
+          <div className="w-full md:w-3/5 h-[400px] md:h-auto bg-[#F2EDE3]/50 relative border-b md:border-b-0 md:border-r border-borderLight flex flex-col">
             {/* View Mode Toggle */}
             {models && project.images && (
-              <div className="absolute top-4 left-4 z-[110] flex bg-black/60 backdrop-blur-md rounded-full border border-white/10 p-1">
+              <div className="absolute top-4 left-4 z-[110] flex bg-white/90 backdrop-blur-md rounded-full border border-borderLight p-1 shadow-paper">
                 <button 
                   onClick={() => setViewMode('model')}
-                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all ${viewMode === 'model' ? 'bg-primary text-black shadow-glow-primary' : 'text-white/60 hover:text-white'}`}
+                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all ${viewMode === 'model' ? 'bg-primary text-white shadow-candy font-bold' : 'text-textMuted hover:text-textDefault'}`}
                 >
                   3D Analysis
                 </button>
                 <button 
                   onClick={() => setViewMode('photos')}
-                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all ${viewMode === 'photos' ? 'bg-secondary text-black shadow-glow-secondary' : 'text-white/60 hover:text-white'}`}
+                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase transition-all ${viewMode === 'photos' ? 'bg-secondary text-white font-bold' : 'text-textMuted hover:text-textDefault'}`}
                 >
                   Photo Record
                 </button>
@@ -181,18 +182,18 @@ function ProjectModal({ project, isOpen, onClose }) {
               {viewMode === 'model' && models ? (
                 <div className="w-full h-full relative group/canvas">
                   <Canvas shadows dpr={[1, 1.5]} camera={{ fov: 45, position: [0, 0, 5] }} gl={{ alpha: true, antialias: true }}>
-                    <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-                    <pointLight position={[-10, -10, -10]} intensity={0.5} color="#00E5FF" />
+                    <ambientLight intensity={0.7} />
+                    <directionalLight position={[10, 10, 10]} intensity={1.5} color="#FFFFFF" castShadow />
+                    <pointLight position={[-8, 6, -5]} intensity={1.5} color="#D40028" />
                     <Suspense fallback={
                       <Html center>
                         <div className="flex flex-col items-center justify-center gap-3 w-48">
-                          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin shadow-[0_0_15px_#38bdf8]"></div>
-                          <span className="text-[9px] font-mono text-primary tracking-[0.2em] uppercase animate-pulse">Loading Model Analysis</span>
+                          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-[9px] font-mono text-primary font-bold tracking-[0.2em] uppercase animate-pulse">Loading CAD Analysis</span>
                         </div>
                       </Html>
                     }>
-                      <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
+                      <Stage environment="city" intensity={0.6} adjustCamera={1.2}>
                         <InteractiveModel url={models[activeIteration]} disableTransparency={project.disableTransparency} />
                       </Stage>
                     </Suspense>
@@ -202,26 +203,25 @@ function ProjectModal({ project, isOpen, onClose }) {
                   {models.length > 1 && (
                     <>
                       <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                        <button onClick={prevIteration} className="p-3 bg-black/50 hover:bg-primary/20 rounded-full border border-white/10 text-white transition-all pointer-events-auto backdrop-blur-md"><ChevronLeft className="w-6 h-6" /></button>
+                        <button onClick={prevIteration} className="p-3 bg-white/90 hover:bg-primary hover:text-white rounded-full border border-borderLight text-textDefault transition-all pointer-events-auto shadow-paper"><ChevronLeft className="w-5 h-5" /></button>
                       </div>
                       <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                        <button onClick={nextIteration} className="p-3 bg-black/50 hover:bg-primary/20 rounded-full border border-white/10 text-white transition-all pointer-events-auto backdrop-blur-md"><ChevronRight className="w-6 h-6" /></button>
+                        <button onClick={nextIteration} className="p-3 bg-white/90 hover:bg-primary hover:text-white rounded-full border border-borderLight text-textDefault transition-all pointer-events-auto shadow-paper"><ChevronRight className="w-5 h-5" /></button>
                       </div>
                     </>
                   )}
-                  <div className="absolute bottom-6 left-6 flex items-center gap-3 bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md pointer-events-none">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-glow-primary"></div>
-                    <span className="text-[10px] font-mono text-white/80 tracking-widest uppercase">
-                      Interactive Simulation Core Active
+                  <div className="absolute bottom-6 left-6 flex items-center gap-3 bg-white/90 px-4 py-2 rounded-full border border-borderLight shadow-paper pointer-events-none">
+                    <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></div>
+                    <span className="text-[10px] font-mono text-textDefault tracking-wider uppercase font-bold">
+                      Interactive CAD Model Active
                     </span>
                   </div>
                 </div>
               ) : project.images ? (
-                <div className="w-full h-full p-8 md:p-12 overflow-y-auto bg-black/20 flex flex-col gap-8 scrollbar-thin scrollbar-thumb-white/10">
+                <div className="w-full h-full p-8 md:p-12 overflow-y-auto bg-white/50 flex flex-col gap-8 scrollbar-thin">
                   {project.images.map((img, i) => (
                     <div key={i} className="group relative">
-                      <img src={img} alt={`${project.title} - ${i}`} className="w-full rounded-2xl border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]" />
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                      <img src={img} alt={`${project.title} - ${i}`} className="w-full rounded-xl border border-borderLight shadow-paper transition-transform duration-500 group-hover:scale-[1.01]" />
                     </div>
                   ))}
                 </div>
@@ -234,79 +234,74 @@ function ProjectModal({ project, isOpen, onClose }) {
           </div>
 
           {/* Right: Info Section */}
-          <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto flex flex-col bg-background/20 backdrop-blur-md">
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <span className="text-xs font-mono text-primary tracking-[0.3em] uppercase mb-2 block">{project.status}</span>
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-white text-glow mb-4">
-                  {project.title}
-                </h2>
+          <div className="w-full md:w-2/5 p-8 md:p-12 overflow-y-auto flex flex-col bg-[#FAF8F2] justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <span className="text-xs font-mono text-primary font-bold tracking-widest uppercase mb-1.5 block">{project.status}</span>
+                  <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-textDefault uppercase">
+                    {project.title}
+                  </h2>
+                </div>
+                <div className="p-3 bg-primary/10 rounded-xl border border-primary/20 shrink-0">
+                  {IconMap[project.icon]}
+                </div>
               </div>
-              <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
-                {IconMap[project.icon]}
-              </div>
-            </div>
 
-            <div className="space-y-8">
-              <section>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-[1px] bg-secondary/50"></div>
-                  <span className="text-[10px] font-mono text-secondary tracking-widest uppercase">Project Overview</span>
-                </div>
-                <p className="text-textMuted leading-relaxed text-lg italic">
-                  "{project.fullDescription || project.description}"
-                </p>
-              </section>
-
-              <section>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-[1px] bg-primary/50"></div>
-                  <span className="text-[10px] font-mono text-primary tracking-widest uppercase">Engineering Challenge</span>
-                </div>
-                <div className="pl-4 border-l-2 border-primary/30">
-                  <p className="text-white/90 font-light">{project.challenge}</p>
-                </div>
-              </section>
-
-              <section>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-[1px] bg-white/30"></div>
-                  <span className="text-[10px] font-mono text-white/50 tracking-widest uppercase">Technical Stack</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.tools.map((tool, i) => (
-                    <span key={i} className="text-xs font-mono text-primary/80 bg-primary/5 px-3 py-1.5 rounded-md border border-primary/20">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </section>
-              
-              {/* Section to jump to photos if in model mode */}
-              {viewMode === 'model' && project.images && (
+              <div className="space-y-6">
                 <section>
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-[1px] bg-secondary/30"></div>
-                        <span className="text-[10px] font-mono text-secondary/50 tracking-widest uppercase">Documentation Gallery</span>
-                    </div>
-                    <button 
-                        onClick={() => setViewMode('photos')}
-                        className="group w-full relative aspect-video rounded-xl overflow-hidden border border-white/10 hover:border-secondary/50 transition-all shadow-lg"
-                    >
-                        <img src={project.images[0]} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/10 transition-colors">
-                            <span className="px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-white/20 text-[10px] font-mono text-white tracking-[0.2em] group-hover:bg-secondary group-hover:text-black group-hover:border-transparent transition-all uppercase">
-                                View Full Gallery
-                            </span>
-                        </div>
-                    </button>
+                  <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-primary font-bold">
+                    <span>// OVERVIEW</span>
+                  </div>
+                  <p className="text-textMuted leading-relaxed text-sm">
+                    {project.fullDescription || project.description}
+                  </p>
                 </section>
-              )}
+
+                <section>
+                  <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-primary font-bold">
+                    <span>// ENGINEERING CHALLENGE</span>
+                  </div>
+                  <div className="pl-4 border-l-2 border-primary bg-primary/5 py-2.5 rounded-r-lg">
+                    <p className="text-textDefault text-sm">{project.challenge}</p>
+                  </div>
+                </section>
+
+                <section>
+                  <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-textMuted font-bold">
+                    <span>// TECHNICAL STACK</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool, i) => (
+                      <span key={i} className="text-xs font-mono text-textDefault bg-white px-3 py-1.5 rounded-md border border-borderLight shadow-sm">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+                
+                {/* Jump to photos if in model mode */}
+                {viewMode === 'model' && project.images && (
+                  <section className="pt-2">
+                    <button 
+                      onClick={() => setViewMode('photos')}
+                      className="group w-full relative aspect-video rounded-xl overflow-hidden border border-borderLight hover:border-primary transition-all shadow-paper"
+                    >
+                      <img src={project.images[0]} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                        <span className="px-4 py-2 bg-white/95 rounded-full text-[10px] font-mono text-textDefault font-bold tracking-widest uppercase shadow-paper">
+                          View Full Gallery ({project.images.length})
+                        </span>
+                      </div>
+                    </button>
+                  </section>
+                )}
+              </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/5 flex justify-between items-center">
-              <span className="text-[9px] font-mono text-textMuted tracking-widest uppercase">Record ID: {project.id}</span>
-              <div className="w-2 h-2 rounded-full bg-secondary animate-ping"></div>
+            <div className="mt-8 pt-6 border-t border-borderLight flex justify-between items-center text-[10px] font-mono text-textMuted uppercase">
+              <span>RECORD ID: {project.id}</span>
+              <span className="text-primary font-bold">VERIFIED SPEC</span>
             </div>
           </div>
         </motion.div>
@@ -316,14 +311,12 @@ function ProjectModal({ project, isOpen, onClose }) {
 }
 
 const ProjectCard = ({ project, idx, onClick }) => {
-  const containerRef = useRef(null);
-  
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: idx * 0.1 }}
+      transition={{ duration: 0.5, delay: idx * 0.08 }}
       onClick={() => onClick(project)}
       onMouseEnter={() => {
         const models = project.models || (project.modelPath ? [project.modelPath] : null);
@@ -331,55 +324,44 @@ const ProjectCard = ({ project, idx, onClick }) => {
           models.forEach(url => useGLTF.preload(url));
         }
       }}
-      className="group relative glass-panel overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-500 cursor-pointer"
+      className="group relative bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-borderLight hover:border-primary/60 hover:shadow-paper-lg transition-all duration-300 cursor-pointer flex flex-col justify-between p-8"
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.color} to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-      
-      <div className="p-8 relative z-10 flex flex-col h-full">
+      <div>
         <div className="flex justify-between items-start mb-6">
-          <div className="p-4 bg-background/50 rounded-xl border border-white/5 group-hover:border-primary/30 transition-colors shadow-inner">
+          <div className="p-3.5 bg-primary/5 rounded-xl border border-primary/20 group-hover:bg-primary/10 transition-colors">
             {IconMap[project.icon]}
           </div>
-          <div className="flex flex-col items-end">
-            <span className="text-xs font-mono px-3 py-1 bg-white/5 rounded-full border border-white/10 text-white group-hover:border-primary/50 group-hover:text-primary transition-colors">
-              {project.status}
-            </span>
-            <div className="mt-4 p-2 bg-primary/10 rounded-full text-primary group-hover:bg-primary/20 transition-all opacity-0 group-hover:opacity-100">
-              <Maximize2 className="w-4 h-4" />
-            </div>
-          </div>
-        </div>
-
-        <h3 className="text-2xl font-display font-bold text-white mb-3 group-hover:text-glow transition-all">
-          {project.title}
-        </h3>
-        
-        <p className="text-textMuted mb-8 line-clamp-3 leading-relaxed">
-          {project.description}
-        </p>
-
-        <div className="mt-auto flex justify-between items-center">
-          <div className="flex -space-x-2">
-            {project.tools.slice(0, 3).map((tool, i) => (
-              <div key={i} className="w-8 h-8 rounded-full bg-background border border-white/10 flex items-center justify-center text-[8px] font-mono text-primary/80" title={tool}>
-                {tool.charAt(0)}
-              </div>
-            ))}
-            {project.tools.length > 3 && (
-              <div className="w-8 h-8 rounded-full bg-background border border-white/10 flex items-center justify-center text-[8px] font-mono text-textMuted">
-                +{project.tools.length - 3}
-              </div>
-            )}
-          </div>
-          
-          <span className="text-[10px] font-mono text-primary tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
-            Open Interface →
+          <span className="text-xs font-mono px-3 py-1 bg-primary/10 text-primary font-bold rounded-full border border-primary/20">
+            {project.status}
           </span>
         </div>
 
-        {/* Cyberpunk decorative lines */}
-        <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-primary/0 group-hover:border-primary/50 transition-colors duration-500 m-2"></div>
-        <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-secondary/0 group-hover:border-secondary/50 transition-colors duration-500 m-2"></div>
+        <h3 className="text-xl sm:text-2xl font-display font-bold text-textDefault mb-3 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
+        
+        <p className="text-textMuted mb-6 line-clamp-3 leading-relaxed text-sm">
+          {project.description}
+        </p>
+      </div>
+
+      <div className="mt-auto pt-6 border-t border-borderLight flex justify-between items-center">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tools.slice(0, 3).map((tool, i) => (
+            <span key={i} className="px-2 py-0.5 rounded bg-surfaceMuted border border-borderLight text-[10px] font-mono text-textDefault">
+              {tool}
+            </span>
+          ))}
+          {project.tools.length > 3 && (
+            <span className="px-1.5 py-0.5 text-[10px] font-mono text-textMuted">
+              +{project.tools.length - 3}
+            </span>
+          )}
+        </div>
+        
+        <span className="text-xs font-mono font-bold text-primary tracking-wider uppercase group-hover:translate-x-1 transition-transform flex items-center gap-1">
+          Inspect →
+        </span>
       </div>
     </motion.div>
   );
@@ -387,26 +369,6 @@ const ProjectCard = ({ project, idx, onClick }) => {
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
-
-  // Progressive background preloading to speed up visual load times without crashing mobile browser memory
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      let delay = 0;
-      projects.forEach((project) => {
-        const models = project.models || (project.modelPath ? [project.modelPath] : null);
-        if (models) {
-          models.forEach((url) => {
-            setTimeout(() => {
-              useGLTF.preload(url);
-            }, delay);
-            delay += 2500; // Load one model file every 2.5 seconds to keep CPU and memory usage flat
-          });
-        }
-      });
-    }, 4000); // Start preloading 4 seconds after page load
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section id="projects" className="py-24 relative">
@@ -419,40 +381,28 @@ export default function ProjectsSection() {
           />
         )}
       </AnimatePresence>
-      {/* Background glow */}
-      {/* Background glow removed for all-black theme */}
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6 border-b border-borderLight pb-8">
           <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-2 mb-4"
-            >
-              <div className="w-8 h-[2px] bg-secondary"></div>
-              <span className="text-secondary font-mono tracking-widest text-sm uppercase">Prototype Database</span>
-            </motion.div>
+            <div className="flex items-center gap-2 mb-2 text-xs font-mono uppercase tracking-widest text-primary font-bold">
+              <span>[02]</span>
+              <span>TECHNICAL DOSSIERS</span>
+            </div>
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-display font-bold text-glow"
+              className="text-4xl md:text-5xl font-display font-extrabold uppercase text-textDefault tracking-tight"
             >
               ENGINEERED SOLUTIONS
             </motion.h2>
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-textMuted font-mono text-sm max-w-xs text-right"
-          >
-            Displaying {projects.length} verified records of mechanical and mechatronic design.
-          </motion.div>
+          <div className="text-textMuted font-mono text-xs uppercase tracking-widest">
+            {projects.length} VERIFIED CAD & ROBOTICS RECORDS
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

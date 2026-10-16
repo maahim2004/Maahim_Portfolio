@@ -28,11 +28,11 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen text-textDefault pb-[200px] sm:pb-0">
+    <div className="relative min-h-screen text-textDefault bg-[#FAF8F2] selection:bg-primary selection:text-white">
       <Navbar />
 
       {/* Global 3D Canvas Background Layer */}
-      <div className="fixed inset-0 z-0 pointer-events-none w-full h-full">
+      <div className="fixed inset-0 z-0 pointer-events-none w-full h-full opacity-65">
         <Canvas 
           shadows 
           camera={{ position: [0, 0, 10], fov: 35 }}
