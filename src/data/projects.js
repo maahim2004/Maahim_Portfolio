@@ -24,12 +24,12 @@ export const projects = [
   },
   {
     id: "sentinel-bot",
-    title: "SENTINEL Bot",
-    status: "Completed",
-    description: "Autonomous robotic system engineered to till and convert barren landscapes into fertile terrain.",
-    fullDescription: "SENTINEL is an autonomous field robot designed for large-scale soil restoration, targeting 60 million hectares of barren land in India. Equipped with advanced sensors and high-torque drivetrains, it performs soil testing and precise seed sowing to replenish the soil. The project involved designing a robust mechanical chassis capable of handling extreme drag forces during soil excavation.",
-    challenge: "Targeting 60 million hectares of barren land in India and converting them into fertile land through analysis by soil testing and sowing seeds that will replenish the soil.",
-    tools: ["SolidWorks", "AutoCAD", "Prototyping"],
+    title: "SENTINEL: Autonomous Dual-Robot System for Land Restoration and Precision Farming | Team DRISHTI",
+    status: "NIDHI PRAYAS Finalist",
+    description: "Semi-autonomous dual robotic system (Lumora & Sprovia) fusing robotics, AI and precision agriculture to restore degraded land and promote sustainable, non-intensive farming.",
+    fullDescription: "Conceptualized Sentinel, a semi-autonomous dual robotic system comprising Sentinel Alpha (Lumora) and Sentinel Beta (Sprovia), built as a fusion of robotics, artificial intelligence and precision agriculture to restore degraded land and promote sustainable, non-intensive farming. Designed around a Robot-as-a-Service (RaaS) model, the system delivers data-driven interventions for soil restoration, precision agrochemical application and ecosystem rehabilitation while aligning with UN Sustainable Development Goals (SDGs 2, 3, 6, 9, 12 and 15). The concept was developed as a startup proposal and was selected as a finalist in the NIDHI PRAYAS Program.\n\nLumora was designed to perform on-site soil health assessment using a 7-in-1 soil sensor, auger-based soil engaging assembly, lead-screw linear actuators, AI-assisted soil diagnostics and automated seed pod and sapling plantation for agroforestry. Sprovia complemented the restoration workflow through V-shaped furrow cutters, strip tilling, intercropping, mulching, targeted nutrient delivery and precision spraying. The proposed system incorporated ROS, Raspberry Pi 4, Arduino Mega 2560, Sony IMX219 cameras, HC-SR04 ultrasonic sensors, GPS-IMU, planetary DC motors, stepper motors, servo motors and lead-screw linear actuators to coordinate autonomous navigation, soil sampling, crop-weed classification and precision field operations.\n\nThe solution was envisioned for farmers, environmental organizations, NGOs, rural communities, government agencies including MoAFW, MoEFCC, FSI and ICAR, as well as CSR-led land restoration initiatives, supporting seasonal or cyclic deployment based on restoration objectives and farming requirements.",
+    challenge: "Coordinating a dual-robot ecosystem (Lumora & Sprovia) with integrated soil diagnostics, autonomous navigation, and precision agrochemical application under a Robot-as-a-Service model for degraded land restoration.",
+    tools: ["ROS", "Raspberry Pi 4", "Arduino Mega 2560", "Sony IMX219", "GPS-IMU", "SolidWorks"],
     color: "from-primary/10",
     models: [
       "/models/Sentinel/Sentinel_V1.glb",

@@ -253,9 +253,9 @@ function ProjectModal({ project, isOpen, onClose }) {
                   <div className="flex items-center gap-2 mb-2 text-[10px] font-mono uppercase tracking-widest text-primary font-bold">
                     <span>// OVERVIEW</span>
                   </div>
-                  <p className="text-textMuted leading-relaxed text-sm">
+                  <div className="text-textMuted leading-relaxed text-sm whitespace-pre-line space-y-3">
                     {project.fullDescription || project.description}
-                  </p>
+                  </div>
                 </section>
 
                 <section>
@@ -336,7 +336,7 @@ const ProjectCard = ({ project, idx, onClick }) => {
           </span>
         </div>
 
-        <h3 className="text-xl sm:text-2xl font-display font-bold text-textDefault mb-3 group-hover:text-primary transition-colors">
+        <h3 className="text-xl sm:text-2xl font-display font-bold text-textDefault mb-3 group-hover:text-primary transition-colors leading-snug">
           {project.title}
         </h3>
         
