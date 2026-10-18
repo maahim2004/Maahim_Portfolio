@@ -12,7 +12,7 @@ export const projects = [
   },
   {
     id: "turbofan-engine",
-    title: "Turbofan Engine Simulation",
+    title: "TSTA: Twin Spool Turbofan Assembly | 3D Modelling and CFD",
     status: "Completed",
     description: "Comprehensive 3D modelling and computational fluid dynamics (CFD) simulation of internal airflow.",
     fullDescription: "This project involves the high-fidelity modeling and simulation of a high-bypass turbofan engine. Utilizing computational fluid dynamics (CFD), we analyzed airflow through various stages—fan, compressor, combustion chamber, and turbine. The goal was to optimize blade geometry and thermodynamic cycles for maximum propulsion efficiency.",
