@@ -40,12 +40,12 @@ export const projects = [
   },
   {
     id: "rally-car-suspension",
-    title: "Rally Car Suspension (Makernova 2.0)",
-    status: "Tested & Validated",
-    description: "High-performance suspension system designed for a scale rally car model, absorbing extreme impacts.",
-    fullDescription: "Developed for the Makernova 2.0 competition, this suspension system was designed to handle high-velocity impacts and uneven terrain. The project involved rigorous dynamic testing and material selection to ensure the system could survive a 6-foot drop test while maintaining chassis stability.",
-    challenge: "Achieving stable damping under 4.5kg static load and surviving dynamic 6-foot drop tests without failure.",
-    tools: ["Mechanics", "Dynamic Testing", "Design"],
+    title: "STABILO: Rally Car Suspension System",
+    status: "MAKERNOVA 2.0 • Validated",
+    description: "Scale rally car featuring a non-Grashof four-bar coil spring suspension (k = 2.45 N/mm) validated under 4.5 kg load and 7 ft dynamic drop tests.",
+    fullDescription: "As part of MAKERNOVA 2.0 conducted by DRISHTI, SVNIT, our team designed and fabricated STABILO, a rally car featuring a non-Grashof four-bar coil spring suspension with a spring constant of 2.45 N/mm. The prototype had overall dimensions of 300 × 260 × 98 mm (wheelbase × track width × ground clearance) with a 420 × 170 mm chassis.\n\nMy contributions included CAD design, fabrication and suspension evaluation. The suspension system was assessed through 4.5 kg load tests, achieving a ground clearance of 87.9 mm, and further validated through 7 ft and 5 ft drop tests to evaluate structural integrity, shock absorption and suspension performance. The project provided hands-on experience in mechanism design, fabrication, force analysis and suspension system validation.",
+    challenge: "Synthesizing non-Grashof four-bar linkage kinematics with 2.45 N/mm spring stiffness to endure 7 ft & 5 ft dynamic drop impacts while maintaining 87.9 mm ground clearance under 4.5 kg static payload.",
+    tools: ["CAD Design", "Four-Bar Kinematics", "Dynamic Drop Testing", "Load Testing", "Fabrication"],
     color: "from-secondary/10",
     icon: "cog",
     images: [
